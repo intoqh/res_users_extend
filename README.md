@@ -14,3 +14,27 @@
 
 7.登录用户--我的配置 菜单下视图字段根据不同组控制是否显示,具体要求见下图;
 
+![image](https://github.com/user-attachments/assets/84cbe543-c2ae-4914-b047-342afbaebd8e)
+
+8.禁止以下图片中的字段的快速链接;
+![image](https://github.com/user-attachments/assets/b1aa86f0-d5e4-40eb-97dc-d2fe3b0d89a9)
+
+9.增加以下红色字体字段显示,红色框出的字段普通用户可编辑;
+
+![image](https://github.com/user-attachments/assets/4b1deca0-6003-444a-89d7-14644d33a41f)
+
+10.LDAP服务器设置界面增加sync_to_mobile(允许同步mobile_phone字段到LDAP)字段,字段打勾代表启用同步mobile_phone功能;
+
+11.打开 用户(关联员工)打开--我的配置 菜单视图，修改工作手机字段并保存，同步启用的情况下将自动同步带字段到LDAP当前用户的mobile属性;
+
+12.LDAP服务器设置界面增加sync_login_to_mail(允许同步login字段到LDAP)字段,字段打勾代表启用同步login功能;
+
+13.在用户form界面修改login字段并保存，同步启用的情况下将自动完成该字段同步到LDAP当前用户的mail属性;
+
+14.打开 用户(关联员工)打开--我的配置 菜单视图，修改工作手机字段并保存，则工作手机字段会自动同步员工工作手机和联系人手机;
+
+15.在员工界面修改工作手机字段并保存，该字段会自动同步到员工关联的联系人的手机字段;
+
+16.在联系人界面修改手机字段并保存，该字段会自动同步到联系人对应的用户关的工作手机字段;
+
+
