@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template xml:space="preserve">
+    <!--隐藏My Odoo.com account菜单-->
+    <t t-extend="UserMenu.Actions">
+        <t t-jquery="a[data-menu='account']" t-operation='inner'>
+
+        </t>
+    </t>
+</template>

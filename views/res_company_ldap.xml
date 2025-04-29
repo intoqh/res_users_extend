@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="view_ldap_installer_form_sync" model="ir.ui.view">
+        <field name="name">res.company.ldap.form</field>
+        <field name="model">res.company.ldap</field>
+        <field name="inherit_id" ref="auth_ldap.view_ldap_installer_form" />
+        <field name="arch" type="xml">
+            <field name="user" position="after">
+                <field name="sync_to_mobile" />
+                <field name="sync_login_to_mail" />
+            </field>
+        </field>
+    </record>
+</odoo>

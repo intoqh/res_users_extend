@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="add_employee_id_show" model="ir.ui.view">
+        <field name="name">employee.id.show</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_title')]/group" position="inside">
+                <field name="employee_id" string="关联员工" required="0" readonly="1" groups="base.group_no_one" />
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="res_users_view_form_profile_inherit" model="ir.ui.view">
+        <field name="name">res.users.preferences.form.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="hr.res_users_view_form_profile"/>
+        <field name="arch" type="xml">
+            <!-- 隐藏头和按钮-->
+            <xpath expr="//header" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <!-- 隐藏个人信息页-->
+            <xpath expr="//page[@name='public']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='personal_information']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page[@name='hr_settings']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <!-- 新增字段-->
+            <xpath expr="//field[@name='mobile_phone']" position="before">
+                <field name="gender1" readonly="0"/>
+            </xpath>
+            <!-- 新增字段-->
+            <xpath expr="//field[@name='work_phone']" position="after">
+                <field name="place_of_birth1" readonly="0"/>
+                <field name="marital1" readonly="0"/>
+            </xpath>
+            <!-- 新增字段-->
+            <xpath expr="//field[@name='coach_id']" position="after">
+                <field name="emergency_contact1" readonly="0"/>
+                <field name="emergency_phone1" readonly="0"/>
+            </xpath>
+
+            <!-- mobile_phone字段允许编辑-->
+            <xpath expr="//field[@name='mobile_phone']" position="replace">
+                <field name="mobile_phone" readonly="0" options="{'enable_sms': false,'no_open': True}"/>
+            </xpath>
+            <!-- 取消字段的widget !-->
+            <xpath expr="//field[@name='work_email']" position="attributes">
+                <attribute name="widget"></attribute>
+            </xpath>
+            <!-- 取消打开链接!-->
+            <xpath expr="//field[@name='employee_bank_account_id']" position="attributes">
+                <attribute name="options">{"no_open": True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='work_location']" position="after">
+                <field name="group_value" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='work_location']" position="attributes">
+                <attribute name="attrs">{'invisible': [('group_value', '&lt;', 1)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='work_phone']" position="attributes">
+                <attribute name="attrs">{'invisible': [('group_value', '&lt;', 2)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='employee_parent_id']" position="attributes">
+                <attribute name="attrs">{'invisible': [('group_value', '&lt;', 2)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='coach_id']" position="attributes">
+                <attribute name="attrs">{'invisible': [('group_value', '&lt;', 2)]}</attribute>
+            </xpath>
+
+            <xpath expr="//group[field[@name='coach_id']]" position="after">
+                <group>
+                    <field name="employee_bank_account_id" readonly="1" string="银行账号" options="{'no_open': True}"/>
+                    <field name="bank_ids" string="开户银行" readonly="1" options="{'no_open': True}">
+                        <tree>
+                            <field name="bank_id" nolabel="1" readonly="1"/>
+                        </tree>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_users_form_simple_modif_signature" model="ir.ui.view">
+        <field name="name">res.users.preferences.form.signature</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif" />
+        <field name="arch" type="xml">
+            <!-- 在视图左上角嵌入保存和取消按钮-->
+            <xpath expr="//field[@name='image_1920']" position="before">
+                <header>
+                    <button name="preference_save" type="object" string="保存" class="btn-primary"/>
+                    <button name="preference_cancel" string="取消" special="cancel" class="btn-secondary"/>
+                </header>
+            </xpath>
+            <!-- 隐藏字段-->
+            <xpath expr="//field[@name='signature']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <!-- 隐藏左下角保存和取消按钮，针对用户未关联员工的情况-->
+            <xpath expr="//footer[not(ancestor::field)]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+            </xpath>
+            <!-- 取消字段的email的widget !-->
+            <xpath expr="//field[@name='email']" position="attributes">
+                <attribute name="widget"></attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="action_link_user_to_employee" model="ir.actions.server">
+        <field name="name">用户与员工关联</field>
+        <field name="model_id" ref="base.model_res_users"/>
+        <field name="binding_model_id" ref="base.model_res_users"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="groups_id" eval="[(4,ref('base.group_system'))]"/>
+        <field name="code">
+if records:
+    action = records.manual_link_user_to_employee()
+        </field>
+    </record>
+
+        <record id="action_unlink_user_to_employee" model="ir.actions.server">
+        <field name="name">用户与员工取消关联</field>
+        <field name="model_id" ref="base.model_res_users"/>
+        <field name="binding_model_id" ref="base.model_res_users"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="groups_id" eval="[(4,ref('base.group_system'))]"/>
+        <field name="code">
+if records:
+    action = records.manual_unlink_user_to_employee()
+        </field>
+    </record>
+</odoo>

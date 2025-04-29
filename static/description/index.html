@@ -1,0 +1,51 @@
+
+<head>
+    <meta charset="utf-8"/>
+</head>
+<section class="oe_container">
+    <div class="oe_row ">
+        <div style="margin-bottom:10px;" class="oe_slogan text-center">
+            <div class="oe_span12">
+                <h2 style="font-weight: 600;text-align: left;width: 100%;">主要功能：</h2>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="row oe_row oe_spaced">
+        <div class="col-md-12">
+            1.增加自动任务‘用户与员工自动关联’，每天一次自动完成对用户email字段与员工work_email字段匹配检测,实现员工与用户的自动关联;<br>
+            2.增加服务器动作‘用户与员工关联’，手动完成所选用户的email字段与员工work_email字段匹配检测,实现员工与用户的手动关联;<br>
+            3.增加服务器动作‘用户与员工取消关联’，手动完成员工与用户间取消关联;<br>
+            4.在用户form视图增加关联员工字段employee_id显示；<br>
+            5.打开 用户(未关联员工)--我的配置 菜单下视图更新，包括签署字段隐藏、菜单’Odoo.com账户‘隐藏、视图左上角增加保存和取消按钮、左下角保存和取消按钮隐藏;<br>
+            6.打开 用户(关联员工)--我的配置 菜单下视图更新，包括签署字段隐藏、菜单’Odoo.com账户‘隐藏、顶部右上角按钮隐藏、视图左上角按钮隐藏、三页page栏的隐藏;<br>
+            7.登录用户--我的配置 菜单下视图字段根据不同组控制是否显示,具体要求见下图;<br>
+            <img class="img img-fluid col-md-11 my-3 shadow-lg bg-white rounded px-0" src="1.png"/>
+            <br>
+            <br>
+            8.禁止以下图片中的字段的快速链接;<br>
+            <img class="img img-fluid col-md-11 my-3 shadow-lg bg-white rounded px-0" src="2.png"/>
+            <br>
+            <br>
+            9.增加以下红色字体字段显示,红色框出的字段普通用户可编辑;<br>
+            <img class="img img-fluid col-md-11 my-3 shadow-lg bg-white rounded px-0" src="3.png"/>
+            <br>
+            <br>
+            10.LDAP服务器设置界面增加sync_to_mobile(允许同步mobile_phone字段到LDAP)字段,字段打勾代表启用同步mobile_phone功能;<br>
+            11.打开 用户(关联员工)打开--我的配置 菜单视图，修改工作手机字段并保存，同步启用的情况下将自动同步带字段到LDAP当前用户的mobile属性;<br>
+            12.LDAP服务器设置界面增加sync_login_to_mail(允许同步login字段到LDAP)字段,字段打勾代表启用同步login功能;<br>
+            13.在用户form界面修改login字段并保存，同步启用的情况下将自动完成该字段同步到LDAP当前用户的mail属性;<br>
+            14.打开 用户(关联员工)打开--我的配置 菜单视图，修改工作手机字段并保存，则工作手机字段会自动同步员工工作手机和联系人手机;<br>
+            15.在员工界面修改工作手机字段并保存，该字段会自动同步到员工关联的联系人的手机字段;<br>
+            16.在联系人界面修改手机字段并保存，该字段会自动同步到联系人对应的用户关的工作手机字段;<br>
+            <br>
+            <br>
+
+        </div>
+    </div>
+</section>
+
+
+
